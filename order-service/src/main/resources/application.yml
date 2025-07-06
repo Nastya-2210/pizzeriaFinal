@@ -1,0 +1,41 @@
+server:
+  port: 8082
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=order
+    username: postgres
+    password: 5432
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        globally_quoted_identifiers: true
+        default_schema: "order"
+
+feign:
+  client:
+    config:
+      kitchen-service:
+        url: http://localhost:8083
+      default:
+        connectTimeout: 5000
+        readTimeout: 5000
+
+  liquibase:
+    enabled: true
+    change-log: classpath:/db/changelog/orders/db.changelog-master.yaml
+    default-schema: "order"
+    contexts: dev
+    user: postgres
+    password: postgres
+    url: ${spring.datasource.url}
+    drop-first: false
+
+logging:
+  level:
+    root: INFO
+    org.springframework.jdbc: DEBUG
+    liquibase: DEBUG

@@ -1,0 +1,31 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2
+      author: your_name
+      changes:
+        - insert:
+            tableName: menu_items
+            schemaName: menu
+            columns:
+              - column:
+                  name: name
+                  value: "Пепперони"
+              - column:
+                  name: description
+                  value: "Пицца с пепперони и сыром Моцарелла"
+              - column:
+                  name: price
+                  value: 550.00
+        - insert:
+            tableName: menu_items
+            schemaName: menu
+            columns:
+              - column:
+                  name: name
+                  value: "Маргарита"
+              - column:
+                  name: description
+                  value: "Классическая пицца с томатами и сыром Моцарелла"
+              - column:
+                  name: price
+                  value: 450.00

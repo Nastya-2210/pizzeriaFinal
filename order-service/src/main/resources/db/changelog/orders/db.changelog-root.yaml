@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - includeAll:
+      path: db/changelog/menu
+  - includeAll:
+      path: db/changelog/orders
+  - includeAll:
+      path: db/changelog/kitchen
