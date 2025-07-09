@@ -1,1 +1,8 @@
 rootProject.name = 'pizzeriaFinal'
+
+// Все модули проекта
+include 'ApiGateway'
+include 'kitchen-service'
+include 'menu-service'
+include 'order-service'
+include 'common'
