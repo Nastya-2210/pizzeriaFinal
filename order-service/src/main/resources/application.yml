@@ -20,9 +20,12 @@ feign:
     config:
       kitchen-service:
         url: http://localhost:8083
+      menu-service:
+        url: http://localhost:8081
       default:
         connectTimeout: 5000
         readTimeout: 5000
+        loggerLevel: basic
 
   liquibase:
     enabled: true

@@ -26,6 +26,7 @@ repositories {
 dependencies {
     // Spring Boot Starter Web для создания RESTful API
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation project(':common')
     // Spring Boot Starter Data JPA для работы с базами данных
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     // PostgreSQL JDBC Driver
