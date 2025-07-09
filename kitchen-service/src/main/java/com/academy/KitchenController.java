@@ -1,8 +1,6 @@
 package com.academy;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import dto.OrderRequestDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,10 +19,10 @@ public class KitchenController {
     @Transactional
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public KitchenOrder createKitchenOrder(@RequestBody KitchenOrderRequest request) {
+    public KitchenOrder createKitchenOrder(@RequestBody OrderRequestDTO request) {
         KitchenOrder kitchenOrder = new KitchenOrder();
-        kitchenOrder.setId(request.getOrderId());
-        kitchenOrder.setStatus(KitchenOrderStatus.valueOf("NEW"));
+        kitchenOrder.setStatus(KitchenOrderStatus.NEW);
+        kitchenOrder.setAcceptedAt(LocalDateTime.now());
         return repository.save(kitchenOrder);
     }
 
@@ -47,7 +45,7 @@ public class KitchenController {
     @PutMapping("/{id}/complete")
     public KitchenOrder completeOrder(@PathVariable Long id) {
         KitchenOrder order = repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Order not found"));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Order not found"));
         order.setStatus(KitchenOrderStatus.valueOf("COMPLETED"));
         order.setCompletedAt(LocalDateTime.now());
         return repository.save(order);
@@ -56,15 +54,5 @@ public class KitchenController {
     @GetMapping
     public List<KitchenOrder> getAllOrders() {
         return repository.findAll();
-    }
-
-    // DTO для запроса создания заказа на кухне
-    @Data
-    @NoArgsConstructor
-    @AllArgsConstructor
-    public static class KitchenOrderRequest {
-        private Long orderId;
-        private LocalDateTime acceptedAt;
-        private LocalDateTime completedAt;
     }
 }

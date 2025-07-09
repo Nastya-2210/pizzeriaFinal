@@ -17,11 +17,11 @@ spring:
     properties:
       hibernate:
         globally_quoted_identifiers: true
-        default_schema: "order"
+        default_schema: "kitchen"
   liquibase:
     enabled: true
     change-log: classpath:db/changelog/kitchen/db.changelog-master.yaml
-    default-schema: "order"
+    default-schema: "kitchen"
     contexts: dev
     user: postgres
     password: postgres

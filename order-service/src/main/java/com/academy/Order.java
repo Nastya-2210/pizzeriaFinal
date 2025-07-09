@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -19,7 +20,7 @@ public class Order {
     private String status;
     private LocalDateTime createdAt = LocalDateTime.now();
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<OrderItem> items;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "order")
+    private List<OrderItem> items = new ArrayList<>();
 }
 
